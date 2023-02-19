@@ -6,7 +6,7 @@ import {TaskType} from '../../../App';
 
 type PropsType = {
     tasks: Array<TaskType>
-        removeTask: (id: string) => void
+    removeTask: (id: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
 }
 
