@@ -1,0 +1,16 @@
+.todolistsContainer {
+  background-color: indianred;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  .todolists {
+    background-color: lightsalmon;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
