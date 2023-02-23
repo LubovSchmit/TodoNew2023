@@ -1,0 +1,17 @@
+.addItemInputFormContainer {
+  .error {
+    border: 1px solid red;
+  }
+
+  .errorMsg {
+    color: red;
+  }
+
+  .activeFilter {
+    background-color: darksalmon;
+  }
+
+  .isDone {
+    opacity: 0.5;
+  }
+}
