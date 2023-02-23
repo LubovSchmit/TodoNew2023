@@ -2,19 +2,12 @@
   background-color: bisque;
   margin: 30px;
 
-  .error {
-    border: 1px solid red;
+  .todolistTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
 
-  .errorMsg {
-    color: red;
-  }
 
-  .activeFilter {
-    background-color: darksalmon;
-  }
-
-  .isDone {
-    opacity: 0.5;
-  }
 }

@@ -5,9 +5,10 @@ import {TaskType} from '../../../../App';
 
 
 type PropsType = {
+    id: string
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    removeTask: (id: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
 
 }
 
@@ -16,10 +17,10 @@ const Task = (props: PropsType) => {
         <div className={style.taskContainer}>
             {props.tasks.map(t => {
                     const onRemoveHandler = () => {
-                        props.removeTask(t.id)
+                        props.removeTask(t.id, props.id)
                     }
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(t.id, e.currentTarget.checked);
+                        props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
 
                     }
 

@@ -3,6 +3,7 @@ import style from './Todolist.module.scss'
 import Tasks from './tasks/Tasks';
 import {FilterValuesType} from '../Todolists';
 import {TaskType} from '../../App';
+import {AddItemInputForm} from '../../commun/inputForm/AddItemInputForm';
 
 
 type PropsType = {
@@ -10,36 +11,16 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     changeFilter: (value: FilterValuesType, todolistId: string) => void
-    removeTask: (id: string) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    removeTask: (id: string, todolistId: string) => void
+    addTask: (title: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
     taskFilter: FilterValuesType
+    removeTodolist: (id: string) => void
 }
 
 export function Todolist(props: PropsType) {
 
-    const [newTaskTitle, setNewTaskTitle] = useState('');
-    let [error, setError] = useState<string | null>(null)
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
-    }
-    const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
-
-        if (e.charCode === 13) {
-            props.addTask(newTaskTitle)
-            setNewTaskTitle('')
-        }
-    }
-    const addTaskHandler = () => {
-        if (newTaskTitle.trim() !== '' && newTaskTitle !== 'kakashka') {
-            props.addTask(newTaskTitle)
-            setNewTaskTitle('')
-        } else {
-            setError('Title is required')
-        }
-    }
     const onAllClickHandler = () => {
         props.changeFilter('all', props.id)
     }
@@ -49,28 +30,25 @@ export function Todolist(props: PropsType) {
     const onCompletedClickHandler = () => {
         props.changeFilter('completed', props.id)
     }
-
+    const removeTodolistHandler = () => {
+        props.removeTodolist(props.id)
+    }
 
     return (
+
         <div className={style.todolist}>
 
-            <h3>{props.title}</h3>
-
-            <div>
-                <input className={error ? style.error : ''}
-                       value={newTaskTitle}
-                       onChange={onChangeHandler}
-                       onKeyPress={onKeyPressHandler}
-                />
-
-                <button onClick={addTaskHandler}>+</button>
-
-                {error && <div className={style.errorMsg}>{error}</div>}
-
+            <div className={style.todolistTitle}>
+                <h3>{props.title}</h3>
+                <button onClick={removeTodolistHandler}>x</button>
             </div>
 
+
+            <AddItemInputForm addTask={props.addTask} id={props.id}/>
+
             <ul>
-                <Tasks tasks={props.tasks}
+                <Tasks id={props.id}
+                       tasks={props.tasks}
                        removeTask={props.removeTask}
                        changeTaskStatus={props.changeTaskStatus}
                 />

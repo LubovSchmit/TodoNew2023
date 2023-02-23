@@ -5,9 +5,10 @@ import {TaskType} from '../../../App';
 
 
 type PropsType = {
+    id: string
     tasks: Array<TaskType>
-    removeTask: (id: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    removeTask: (id: string, todolistId: string) => void
+    changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
 }
 
 
@@ -22,7 +23,8 @@ const Tasks = (props: PropsType) => {
             </h4>
 
 
-            <Task tasks={props.tasks}
+            <Task id={props.id}
+                  tasks={props.tasks}
                   removeTask={props.removeTask}
                   changeTaskStatus={props.changeTaskStatus}
             />
