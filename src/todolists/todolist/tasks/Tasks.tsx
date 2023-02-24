@@ -9,6 +9,7 @@ type PropsType = {
     tasks: Array<TaskType>
     removeTask: (id: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
+    changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
 }
 
 
@@ -27,8 +28,10 @@ const Tasks = (props: PropsType) => {
                   tasks={props.tasks}
                   removeTask={props.removeTask}
                   changeTaskStatus={props.changeTaskStatus}
+                  changeTaskTitle={props.changeTaskTitle}
             />
         </div>
+
     );
 };
 

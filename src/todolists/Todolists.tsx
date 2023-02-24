@@ -2,7 +2,8 @@ import React from 'react';
 import style from './Todolists.module.scss'
 import {Todolist} from './todolist/Todolist';
 
-import {TaskType, TodolistType} from '../App';
+import {TasksObjType, TaskType, TodolistType} from '../App';
+import {AddItemInputForm} from '../commun/inputForm/AddItemInputForm';
 
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
@@ -10,12 +11,15 @@ export type FilterValuesType = 'all' | 'completed' | 'active';
 
 type PropsType = {
     todolists: Array<TodolistType>
-    tasks: {[p: string] : TaskType[]}
+    tasks: TasksObjType
     removeTask: (id: string, todolistId: string) => void
     addTask: (title: string, todolistId: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void
+    changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
-    removeTodolist: (id: string)=> void
+    removeTodolist: (id: string) => void
+    addTodolist: (title: string)=> void
+    changeTitleTodolist: (newValue: string, id:string)=> void
 }
 
 export const Todolists = (props: PropsType) => {
@@ -28,33 +32,36 @@ export const Todolists = (props: PropsType) => {
 
             <div className={style.todolists}>
 
+                <AddItemInputForm addItem={props.addTodolist} />
 
-                {props.todolists.map((tl) => {
+                    {props.todolists.map((tl) => {
 
-                        let tasksForTodolist = props.tasks[tl.id];
+                            let tasksForTodolist = props.tasks[tl.id];
 
-                        if (tl.filter === 'active') {
-                            tasksForTodolist = tasksForTodolist.filter(t => !t.isDone)
+                            if (tl.filter === 'active') {
+                                tasksForTodolist = tasksForTodolist.filter(t => !t.isDone)
+                            }
+                            if (tl.filter === 'completed') {
+                                tasksForTodolist = tasksForTodolist.filter(t => t.isDone)
+                            }
+
+
+                            return <Todolist key={tl.id}
+                                             id={tl.id}
+                                             title={tl.title}
+                                             tasks={tasksForTodolist}
+                                             removeTask={props.removeTask}
+                                             changeFilter={props.changeFilter}
+                                             addTask={props.addTask}
+                                             changeTaskStatus={props.changeTaskStatus}
+                                             changeTaskTitle={props.changeTaskTitle}
+                                             taskFilter={tl.filter}
+                                             removeTodolist={props.removeTodolist}
+                                             changeTitleTodolist={props.changeTitleTodolist}
+                            />
                         }
-                        if (tl.filter === 'completed') {
-                            tasksForTodolist = tasksForTodolist.filter(t => t.isDone)
-                        }
-
-
-                        return <Todolist key={tl.id}
-                                         id={tl.id}
-                                         title={tl.title}
-                                         tasks={tasksForTodolist}
-                                         removeTask={props.removeTask}
-                                         changeFilter={props.changeFilter}
-                                         addTask={props.addTask}
-                                         changeTaskStatus={props.changeTaskStatus}
-                                         taskFilter={tl.filter}
-                                         removeTodolist={props.removeTodolist}
-                        />
+                    )
                     }
-                )
-                }
 
             </div>
         </div>
