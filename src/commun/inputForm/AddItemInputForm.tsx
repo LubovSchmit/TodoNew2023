@@ -4,8 +4,7 @@ import style from '../../commun/inputForm/AddItemInputForm.module.scss';
 
 
 type PropsType = {
-    addTask: (title: string, todolistId: string) => void
-    id: string
+    addItem: (title: string) => void
 }
 
 export const AddItemInputForm = (props: PropsType) => {
@@ -21,13 +20,13 @@ export const AddItemInputForm = (props: PropsType) => {
         setError(null);
 
         if (e.charCode === 13) {
-            props.addTask(newTaskTitle, props.id)
+            props.addItem(newTaskTitle)
             setNewTaskTitle('')
         }
     }
     const addTaskHandler = () => {
         if (newTaskTitle.trim() !== '' && newTaskTitle !== 'kakashka') {
-            props.addTask(newTaskTitle, props.id)
+            props.addItem(newTaskTitle)
             setNewTaskTitle('')
         } else {
             setError('Title is required')
