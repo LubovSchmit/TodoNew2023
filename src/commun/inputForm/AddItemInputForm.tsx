@@ -9,25 +9,25 @@ type PropsType = {
 
 export const AddItemInputForm = (props: PropsType) => {
 
-    const [newTaskTitle, setNewTaskTitle] = useState('');
+    const [newItemTitle, setNewItemTitle] = useState<string>('');
     let [error, setError] = useState<string | null>(null)
 
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setNewTaskTitle(e.currentTarget.value)
+        setNewItemTitle(e.currentTarget.value)
     }
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
 
         if (e.charCode === 13) {
-            props.addItem(newTaskTitle)
-            setNewTaskTitle('')
+            props.addItem(newItemTitle)
+            setNewItemTitle('')
         }
     }
-    const addTaskHandler = () => {
-        if (newTaskTitle.trim() !== '' && newTaskTitle !== 'kakashka') {
-            props.addItem(newTaskTitle)
-            setNewTaskTitle('')
+    const addItemHandler = () => {
+        if (newItemTitle.trim() !== '' && newItemTitle !== 'kakashka') {
+            props.addItem(newItemTitle)
+            setNewItemTitle('')
         } else {
             setError('Title is required')
         }
@@ -36,12 +36,12 @@ export const AddItemInputForm = (props: PropsType) => {
     return (
         <div className={style.addItemInputFormContainer}>
             <input className={error ? style.error : ''}
-                   value={newTaskTitle}
+                   value={newItemTitle}
                    onChange={onChangeHandler}
                    onKeyPress={onKeyPressHandler}
             />
 
-            <button onClick={addTaskHandler}>+</button>
+            <button onClick={addItemHandler}>+</button>
 
             {error && <div className={style.errorMsg}>{error}</div>}
 

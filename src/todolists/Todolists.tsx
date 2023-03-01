@@ -18,8 +18,8 @@ type PropsType = {
     changeTaskTitle: (taskId: string, newValue: string, todolistId: string) => void
     changeFilter: (value: FilterValuesType, todolistId: string) => void
     removeTodolist: (id: string) => void
-    addTodolist: (title: string)=> void
-    changeTitleTodolist: (newValue: string, id:string)=> void
+    addTodolist: (title: string) => void
+    changeTitleTodolist: (newValue: string, id: string) => void
 }
 
 export const Todolists = (props: PropsType) => {
@@ -32,37 +32,37 @@ export const Todolists = (props: PropsType) => {
 
             <div className={style.todolists}>
 
-                <AddItemInputForm addItem={props.addTodolist} />
+                <AddItemInputForm addItem={props.addTodolist}/>
 
-                    {props.todolists.map((tl) => {
+                {props.todolists.map((tl) => {
 
-                            let tasksForTodolist = props.tasks[tl.id];
-
-                            if (tl.filter === 'active') {
-                                tasksForTodolist = tasksForTodolist.filter(t => !t.isDone)
-                            }
-                            if (tl.filter === 'completed') {
-                                tasksForTodolist = tasksForTodolist.filter(t => t.isDone)
-                            }
-
-
-                            return <Todolist key={tl.id}
-                                             id={tl.id}
-                                             title={tl.title}
-                                             tasks={tasksForTodolist}
-                                             removeTask={props.removeTask}
-                                             changeFilter={props.changeFilter}
-                                             addTask={props.addTask}
-                                             changeTaskStatus={props.changeTaskStatus}
-                                             changeTaskTitle={props.changeTaskTitle}
-                                             taskFilter={tl.filter}
-                                             removeTodolist={props.removeTodolist}
-                                             changeTitleTodolist={props.changeTitleTodolist}
-                            />
+                        let tasksForTodolist = props.tasks[tl.id];
+                        if (tl.filter === 'active') {
+                            tasksForTodolist = tasksForTodolist.filter(t => !t.isDone)
                         }
-                    )
-                    }
+                        if (tl.filter === 'completed') {
+                            tasksForTodolist = tasksForTodolist.filter(t => t.isDone)
+                        }
 
+
+                        return <Todolist key={tl.id}
+                                         id={tl.id}
+                                         title={tl.title}
+                                         taskFilter={tl.filter}
+
+                                         removeTodolist={props.removeTodolist}
+                                         changeFilter={props.changeFilter}
+                                         changeTodolistTitle={props.changeTitleTodolist}
+
+                                         tasks={tasksForTodolist}
+                                         removeTask={props.removeTask}
+                                         addTask={props.addTask}
+                                         changeTaskStatus={props.changeTaskStatus}
+                                         changeTaskTitle={props.changeTaskTitle}
+                        />
+                    }
+                )
+                }
             </div>
         </div>
     );

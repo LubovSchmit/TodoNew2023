@@ -26,7 +26,6 @@ const Task = (props: PropsType) => {
                         props.changeTaskStatus(t.id, e.currentTarget.checked, props.id);
 
                     }
-
                     const onChangeTitleHandler = (newValue: string) => {
                         props.changeTaskTitle(t.id, newValue, props.id);
 
@@ -34,13 +33,14 @@ const Task = (props: PropsType) => {
 
                     return <li key={t.id}
                                className={t.isDone ? style.isDone : ''}>
+
                         <input type="checkbox"
                                checked={t.isDone}
                                onChange={onChangeStatusHandler}
                         />
 
-                            <EditableSpan title={t.title}
-                                          onChangeTitle={onChangeTitleHandler}/>
+                        <EditableSpan title={t.title}
+                                      onChangeTitle={onChangeTitleHandler}/>
 
                         <button onClick={onRemoveHandler}>x</button>
                     </li>

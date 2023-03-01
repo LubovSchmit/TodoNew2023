@@ -8,6 +8,16 @@
     justify-content: space-around;
     align-items: center;
   }
+  .filterButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    .activeFilter{
+      background-color: cadetblue;
+    }
+  }
+
 
 
 }
