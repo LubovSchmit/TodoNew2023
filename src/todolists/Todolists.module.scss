@@ -7,10 +7,14 @@
   align-items: center;
 
   .todolists {
-    background-color: lightsalmon;
+    background-color: wheat;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+
+    .isDone {
+      opacity: 0.5;
+    }
   }
 }

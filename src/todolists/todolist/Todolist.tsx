@@ -5,6 +5,9 @@ import {FilterValuesType} from '../Todolists';
 import {TaskType} from '../../App';
 import {AddItemInputForm} from '../../commun/inputForm/AddItemInputForm';
 import {EditableSpan} from '../../commun/editableSpan/EditableSpan';
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
 
 
 type PropsType = {
@@ -53,7 +56,10 @@ export function Todolist(props: PropsType) {
                                   onChangeTitle={onChangeTodolistTitle}/>
                 </h3>
 
-                <button onClick={removeTodolistHandler}>x</button>
+
+                <IconButton size="small">
+                    <DeleteIcon onClick={removeTodolistHandler}/>
+                </IconButton>
             </div>
 
 
@@ -70,15 +76,15 @@ export function Todolist(props: PropsType) {
             </ul>
 
             <div className={style.filterButtonsContainer}>
-                <button className={props.taskFilter === 'all' ? style.activeFilter : ''}
+                <Button className={props.taskFilter === 'all' ? style.activeFilter : ''}
                         onClick={onAllClickHandler}>All
-                </button>
-                <button className={props.taskFilter === 'active' ? style.activeFilter : ''}
+                </Button>
+                <Button className={props.taskFilter === 'active' ? style.activeFilter : ''}
                         onClick={onActiveClickHandler}>Active
-                </button>
-                <button className={props.taskFilter === 'completed' ? style.activeFilter : ''}
+                </Button>
+                <Button className={props.taskFilter === 'completed' ? style.activeFilter : ''}
                         onClick={onCompletedClickHandler}>Completed
-                </button>
+                </Button>
 
             </div>
 

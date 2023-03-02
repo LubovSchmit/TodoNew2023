@@ -1,3 +1,7 @@
 .taskContainer {
-background-color: snow;
+background-color: white;
+
+  .isDone {
+    opacity: 0.5;
+  }
 }

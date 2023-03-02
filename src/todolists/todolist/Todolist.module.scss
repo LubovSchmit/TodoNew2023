@@ -1,6 +1,7 @@
 .todolist {
-  background-color: bisque;
+  background-color: white;
   margin: 30px;
+  
 
   .todolistTitle {
     display: flex;
@@ -13,8 +14,14 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+
+    color: black;
+
     .activeFilter{
       background-color: cadetblue;
+    }
+    .isDone {
+      opacity: 0.5;
     }
   }
 

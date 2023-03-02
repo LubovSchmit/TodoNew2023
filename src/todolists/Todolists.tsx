@@ -4,6 +4,7 @@ import {Todolist} from './todolist/Todolist';
 
 import {TasksObjType, TaskType, TodolistType} from '../App';
 import {AddItemInputForm} from '../commun/inputForm/AddItemInputForm';
+import {Paper} from '@mui/material';
 
 
 export type FilterValuesType = 'all' | 'completed' | 'active';
@@ -45,21 +46,25 @@ export const Todolists = (props: PropsType) => {
                         }
 
 
-                        return <Todolist key={tl.id}
-                                         id={tl.id}
-                                         title={tl.title}
-                                         taskFilter={tl.filter}
+                        return <Paper style={{margin: '10px'}} elevation={24}
+                        >
 
-                                         removeTodolist={props.removeTodolist}
-                                         changeFilter={props.changeFilter}
-                                         changeTodolistTitle={props.changeTitleTodolist}
+                            <Todolist key={tl.id}
+                                      id={tl.id}
+                                      title={tl.title}
+                                      taskFilter={tl.filter}
 
-                                         tasks={tasksForTodolist}
-                                         removeTask={props.removeTask}
-                                         addTask={props.addTask}
-                                         changeTaskStatus={props.changeTaskStatus}
-                                         changeTaskTitle={props.changeTaskTitle}
-                        />
+                                      removeTodolist={props.removeTodolist}
+                                      changeFilter={props.changeFilter}
+                                      changeTodolistTitle={props.changeTitleTodolist}
+
+                                      tasks={tasksForTodolist}
+                                      removeTask={props.removeTask}
+                                      addTask={props.addTask}
+                                      changeTaskStatus={props.changeTaskStatus}
+                                      changeTaskTitle={props.changeTaskTitle}
+                            />
+                        </Paper>
                     }
                 )
                 }

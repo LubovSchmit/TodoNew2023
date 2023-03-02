@@ -3,6 +3,9 @@ import style from './Task.module.scss';
 
 import {TaskType} from '../../../../App';
 import {EditableSpan} from '../../../../commun/editableSpan/EditableSpan';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import {Checkbox} from '@mui/material';
 
 
 type PropsType = {
@@ -34,7 +37,7 @@ const Task = (props: PropsType) => {
                     return <li key={t.id}
                                className={t.isDone ? style.isDone : ''}>
 
-                        <input type="checkbox"
+                        <Checkbox
                                checked={t.isDone}
                                onChange={onChangeStatusHandler}
                         />
@@ -42,7 +45,9 @@ const Task = (props: PropsType) => {
                         <EditableSpan title={t.title}
                                       onChangeTitle={onChangeTitleHandler}/>
 
-                        <button onClick={onRemoveHandler}>x</button>
+                        <IconButton size="small">
+                            <DeleteIcon onClick={onRemoveHandler}/>
+                        </IconButton>
                     </li>
                 }
             )

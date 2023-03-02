@@ -1,7 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import style from '../../commun/inputForm/AddItemInputForm.module.scss';
-
-
+import {TextField} from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
 type PropsType = {
     addItem: (title: string) => void
@@ -35,15 +36,25 @@ export const AddItemInputForm = (props: PropsType) => {
 
     return (
         <div className={style.addItemInputFormContainer}>
-            <input className={error ? style.error : ''}
-                   value={newItemTitle}
-                   onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
-            />
+            <div className={style.textFieldAndButtonContainer}>
+                <TextField value={newItemTitle}
+                           onChange={onChangeHandler}
+                           onKeyPress={onKeyPressHandler}
 
-            <button onClick={addItemHandler}>+</button>
+                           variant="standard"
+                           label={'Task title'}
+                           error={!!error}
+                           helperText={error}
+                />
 
-            {error && <div className={style.errorMsg}>{error}</div>}
+                <IconButton onClick={addItemHandler}>
+                    <AddTaskIcon/>
+                </IconButton>
+            </div>
+
+
+            {/* {error && <div className={style.errorMsg}>{error}</div>}*/}
+
 
         </div>
     );
