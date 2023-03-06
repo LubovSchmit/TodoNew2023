@@ -1,4 +1,10 @@
-import {todolistReducer} from './todolistReducer'
+import {
+    AddTodolist,
+    ChangeTodolistFilter,
+    ChangeTodolistTitle,
+    RemoveTodolist,
+    todolistReducer
+} from './todolistReducer'
 import {v1} from 'uuid';
 import {TodolistType} from '../../App';
 import {FilterValuesType} from '../../todolists/Todolists';
@@ -14,7 +20,7 @@ test('remove todolist', () => {
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'}
     ];
-    const endState = todolistReducer(startState, {type: 'REMOVE-TODOLIST', id: todolistId1})
+    const endState = todolistReducer(startState, RemoveTodolist(todolistId1))
 
     expect(endState.length).toBe(1);
     expect(endState[0].id).toBe(todolistId2)
@@ -33,7 +39,7 @@ test('add todolist', () => {
         {id: todolistId1, title: 'What to learn', filter: 'all'},
         {id: todolistId2, title: 'What to buy', filter: 'all'}
     ];
-    const endState = todolistReducer(startState, {type: 'ADD-TODOLIST', title: newTitle})
+    const endState = todolistReducer(startState, AddTodolist(newTitle))
 
     expect(endState.length).toBe(3);
     expect(endState[2].title).toBe(newTitle)
@@ -53,7 +59,7 @@ test('change todolist filter', () => {
     ];
 
     let newFilter: FilterValuesType = 'active'
-    const endState = todolistReducer(startState, {type: 'CHANGE-TODOLIST-FILTER', filter: newFilter, id: todolistId1})
+    const endState = todolistReducer(startState, ChangeTodolistFilter(todolistId1, newFilter))
 
 
     expect(endState[0].filter).toBe(newFilter)
@@ -74,13 +80,7 @@ test('change todolist title', () => {
         {id: todolistId2, title: 'What to buy', filter: 'all'}
     ];
 
-    const action = {
-        type: 'CHANGE-TODOLIST-TITLE',
-        id: todolistId2,
-        title: newTitle
-    }
-
-    const endState = todolistReducer(startState, action)
+    const endState = todolistReducer(startState, ChangeTodolistTitle(todolistId2, newTitle))
 
     expect(endState[1].title).toBe(newTitle)
     expect(endState[0].title).toBe('What to learn')
