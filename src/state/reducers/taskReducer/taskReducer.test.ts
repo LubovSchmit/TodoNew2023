@@ -1,5 +1,6 @@
 import {addTask, changeTaskStatus, changeTaskTitle, removeTask, taskReducer} from './taskReducer';
 import {TasksObjType} from '../../../App';
+import {addTodolist} from '../todolistReducer/todolistReducer';
 
 const startState: TasksObjType = {
     'todolistId1': [
@@ -21,7 +22,7 @@ test('remove task from correct todolist', () => {
 
     expect(endState['todolistId1'].length).toBe(3)
     expect(endState['todolistId2'].length).toBe(2)
-    expect(endState['todolistId1'].every(t=> t.id != '2')).toBeTruthy()
+    expect(endState['todolistId1'].every(t => t.id != '2')).toBeTruthy()
     expect(endState['todolistId1'][1].id).toBe('3')
 
 });
@@ -31,8 +32,8 @@ test('add task to correct todolist', () => {
 
     expect(endState['todolistId1'].length).toBe(5)
     expect(endState['todolistId2'].length).toBe(2)
-     expect(endState['todolistId1'][0].title).toBe('SASS')
-     expect(endState['todolistId1'][0].id).toBeDefined()
+    expect(endState['todolistId1'][0].title).toBe('SASS')
+    expect(endState['todolistId1'][0].id).toBeDefined()
 
 });
 test('change task status in correct todolist', () => {
@@ -51,6 +52,21 @@ test('change task title in correct todolist', () => {
     expect(endState['todolistId1'][1].title).toBe('CSS')
     expect(endState['todolistId1'][0].title).toBe('HTML&CSS')
     expect(endState['todolistId2'][1].title).toBe('Film')
+
+
+});
+test('new empty array of tasks should be created with creation of new todolist', () => {
+
+    const endState = taskReducer(startState, addTodolist('new todolist'))
+
+    const keys = Object.keys(endState)
+    const newKey = keys.find(k => k != 'todolistId1' && k != 'todolistId2')
+    if (!newKey) {
+        throw Error('New key should be added!')
+    }
+
+    expect(keys.length).toBe(3)
+    expect(endState[newKey]).toStrictEqual([])
 
 
 });
