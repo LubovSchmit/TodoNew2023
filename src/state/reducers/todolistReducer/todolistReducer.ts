@@ -4,7 +4,7 @@ import {FilterValuesType} from '../../../todolists/Todolists';
 
 type StateType = Array<TodolistType>
 
-type RemoveTodolistActionType = {
+export type RemoveTodolistActionType = {
     type: 'REMOVE-TODOLIST'
     id: string
 }

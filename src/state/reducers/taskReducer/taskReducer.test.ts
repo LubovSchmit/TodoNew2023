@@ -1,6 +1,6 @@
 import {addTask, changeTaskStatus, changeTaskTitle, removeTask, taskReducer} from './taskReducer';
 import {TasksObjType} from '../../../App';
-import {addTodolist} from '../todolistReducer/todolistReducer';
+import {addTodolist, removeTodolist} from '../todolistReducer/todolistReducer';
 
 const startState: TasksObjType = {
     'todolistId1': [
@@ -67,6 +67,17 @@ test('new empty array of tasks should be created with creation of new todolist',
 
     expect(keys.length).toBe(3)
     expect(endState[newKey]).toStrictEqual([])
+
+
+});
+test('array of tasks should be deleted with deleting of todolist', () => {
+
+    const endState = taskReducer(startState, removeTodolist('todolistId2'))
+
+    const keys = Object.keys(endState)
+
+    expect(keys.length).toBe(1)
+    expect(endState['todolistId2']).not.toBeDefined()
 
 
 });
